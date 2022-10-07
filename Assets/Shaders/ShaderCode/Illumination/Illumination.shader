@@ -1,33 +1,22 @@
-Shader "Unlit/StencilMaskUnlit"
+Shader "Interactive/Illumination"
 {
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _isBlink ("_isBlink",Range(0,1)) = 0
+        _BlickSpeed ("_BlickSpeed",Range(0,50)) = 13
+        _BlickSaturation("_BlickSaturation",Range(0,20)) = 5
     }
     SubShader
     {
         Tags
         {
-            "RenderType"="Opaque" "Queue" = "Geometry-1"
+            "RenderType"="Opaque"
         }
         LOD 100
 
-        Blend Zero One
-        ZWrite Off
-
         Pass
         {
-            Stencil
-            {
-                Ref 1
-                Comp always
-                Pass replace
-            }
-            //            Stencil
-            //            {
-            //                Ref 1
-            //                Comp GEqual
-            //            }
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -51,12 +40,15 @@ Shader "Unlit/StencilMaskUnlit"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
-            #define TWO_PI 6.28f
+            float _isBlink;
+            float _BlickSpeed;
+            float _BlickSaturation;
+
+            #define TAU 6.28318530718
 
             v2f vert(appdata v)
             {
                 v2f o;
-                // v.vertex.y += sin(v.vertex.z + _Time.y) / 3;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 UNITY_TRANSFER_FOG(o, o.vertex);
@@ -65,10 +57,19 @@ Shader "Unlit/StencilMaskUnlit"
 
             fixed4 frag(v2f i) : SV_Target
             {
-                // sample the texture
+                float t = 0;
+
+                if (_isBlink == 1)
+                {
+                    float xOffset = cos(i.uv.x * TAU * 8) * 1000;
+                    t = cos((i.uv.y + xOffset - _Time.y * 0.05) * TAU * _BlickSpeed) * 0.5 + 0.5;
+                    t *= 1 - i.uv.y;
+                    t = t / 20 * _BlickSaturation;
+                }
+
                 fixed4 col = tex2D(_MainTex, i.uv);
 
-                return col;
+                return col + t;
             }
             ENDCG
         }

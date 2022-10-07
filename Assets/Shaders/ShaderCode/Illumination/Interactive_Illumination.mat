@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MonsterBellyColorMoved
-  m_Shader: {fileID: 4800000, guid: 209851dc1c8e14c4faeff7fdf02ecd44, type: 3}
+  m_Name: Interactive_Illumination
+  m_Shader: {fileID: 4800000, guid: 6c962cac2ed9e1a488829356169e00e2, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -20,15 +20,12 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: e3e8608e324734d43afb4b817f09e312, type: 3}
+        m_Texture: {fileID: 2800000, guid: c0e00c39f1772b945bb3370710ea44ed, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _DistortRate: 0.43
-    - _RotationSpeed: 0.83
-    - _SmoothstapOne: 0.1
-    - _SmoothstapTwo: 0.99
-    m_Colors:
-    - _ColorMultipler: {r: 1, g: 1, b: 1, a: 1}
-    - _DistortColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BlickSaturation: 4.4
+    - _BlickSpeed: 4.5
+    - _isBlink: 0
+    m_Colors: []
   m_BuildTextureStacks: []
