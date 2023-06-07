@@ -3,6 +3,8 @@ Shader "Unlit/StencilMaskUnlit"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _ShakePower ("Shake Power" , Range (0, 0.01)) = 0.0025
+        _ShakeSpeed ("Shake Speed" , Range (1, 20)) = 13
     }
     SubShader
     {
@@ -51,12 +53,15 @@ Shader "Unlit/StencilMaskUnlit"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            float _ShakePower;
+            float _ShakeSpeed;
             #define TWO_PI 6.28f
 
             v2f vert(appdata v)
             {
                 v2f o;
-                // v.vertex.y += sin(v.vertex.z + _Time.y) / 3;
+                v.vertex.x += sin(v.vertex.z + _Time.y * _ShakeSpeed) * _ShakePower;
+                v.vertex.y -= cos(v.vertex.z + _Time.y * _ShakeSpeed) * _ShakePower;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 UNITY_TRANSFER_FOG(o, o.vertex);
@@ -66,9 +71,9 @@ Shader "Unlit/StencilMaskUnlit"
             fixed4 frag(v2f i) : SV_Target
             {
                 // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
+                // fixed4 col = tex2D(_MainTex, i.uv);
 
-                return col;
+                return 0;
             }
             ENDCG
         }

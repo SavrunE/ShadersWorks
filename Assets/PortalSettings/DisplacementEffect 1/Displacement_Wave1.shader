@@ -1,4 +1,4 @@
-Shader "Displacement/Displacement_Wave1"
+Shader "Displacement/Displacement_WaveNew"
 {
     Properties
     {
@@ -6,7 +6,8 @@ Shader "Displacement/Displacement_Wave1"
         _MainTex ("Main Texture", 2D) = "white" {}
         _GrabTexture ("_GrabTexture", 2D) = "white" {}
         _Color ("Color" , Color) = (1,1,1,1)
-        _DisplacementPower ("Displacement Power" , Float) = 0
+        [PerRendererData]
+        _DisplacementPower ("Displacement Power" , Range(-.1,.1)) = 0
         _DisplacementTex ("Displacement Texture", 2D) = "white" {}
     }
 
@@ -65,14 +66,17 @@ Shader "Displacement/Displacement_Wave1"
             {
                 fixed4 displPos = tex2D(_DisplacementTex, i.uv);
                 float2 offset = (displPos.xy * 2 - 1) * _DisplacementPower * displPos.a;
-
+                offset = mul(unity_ObjectToWorld, offset);
                 fixed4 texColor = tex2D(_MainTex, i.uv + offset) * i.color;
+
+                clip(texColor.a - 0.01);
+
                 fixed4 grabColor = tex2D(_GrabTexture, i.grabPos.xy + offset);
 
                 fixed s = step(grabColor, 0.5);
-                fixed4 color = s * (2 * grabColor * texColor) +
+                fixed4 color = s * 2 * grabColor * texColor +
                     (1 - s) * (1 - 2 * (1 - texColor) * (1 - grabColor));
-                color = lerp(grabColor, color, texColor.a);// alpha check here, mb need to change
+                color = lerp(grabColor, color, texColor.a);
                 return color;
             }
             ENDCG

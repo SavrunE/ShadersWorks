@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
+[RequireComponent(typeof(Camera))]
 public class PortalTextureSetup : MonoBehaviour
 {
-	[SerializeField] private Camera _cameraB;
-	[SerializeField] private Material _cameraMatB;
+	private Camera _camera;
+	[SerializeField] private Material _cameraMat;
 
 
     void Start()
     {
-		if (_cameraB.targetTexture != null)
+	    _camera = GetComponent<Camera>();
+	    
+		if (_camera.targetTexture != null)
 		{
-			_cameraB.targetTexture.Release();
+			_camera.targetTexture.Release();
 		}
-		_cameraB.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
-		_cameraMatB.mainTexture = _cameraB.targetTexture;
+		_camera.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
+		_cameraMat.mainTexture = _camera.targetTexture;
 
 	}
 }

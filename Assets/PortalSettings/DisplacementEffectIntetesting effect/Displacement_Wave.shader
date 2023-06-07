@@ -2,7 +2,6 @@ Shader "Displacement/Displacement_Wave_First"
 {
     Properties
     {
-        [PerRendererData]
         _MainTex ("Main Texture", 2D) = "white" {}
         _GrabTexture ("_GrabTexture", 2D) = "white" {}
         _Color ("Color" , Color) = (1,1,1,1)
@@ -66,9 +65,14 @@ Shader "Displacement/Displacement_Wave_First"
                 fixed4 displPos = tex2D(_DisplacementTex, i.uv);
                 float2 offset = (displPos.xy * 2 - 1) * _DisplacementPower * displPos.a;
 
+                fixed4 texColor = tex2D(_MainTex, i.uv + offset) * i.color;
                 fixed4 grabColor = tex2D(_GrabTexture, i.grabPos.xy + offset);
-                fixed4 texColor = tex2D(_MainTex, i.uv) * i.color;
-                return grabColor;
+
+                fixed s = step(grabColor, 0.5);
+                fixed4 color = s * (2 * grabColor * texColor) +
+                    (1 - s) * (1 - 2 * (1 - texColor) * (1 - grabColor));
+                color = lerp(grabColor, color, texColor.a);
+                return color;
             }
             ENDCG
         }

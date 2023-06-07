@@ -6,6 +6,7 @@ using UnityEngine;
 public class PortalController : MonoBehaviour
 {
     private bool _isOpen = false;
+    private  float scale;
 
     private void Start()
     {
@@ -19,6 +20,13 @@ public class PortalController : MonoBehaviour
             if (_isOpen == false)
             {
                 _isOpen = true;
+               
+                // while (transform.localScale.x < 1f)
+                // {
+                //     float timePar = Time.deltaTime;
+                //     transform.localScale = new Vector3(scale + timePar,scale + timePar,scale + timePar);
+                //    await System.Threading.Tasks.Task.Delay(timePar);
+                // }
                 StartCoroutine(Open());
             }
             else

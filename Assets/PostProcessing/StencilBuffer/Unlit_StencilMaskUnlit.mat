@@ -19,10 +19,22 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _DisplacementTex:
+        m_Texture: {fileID: 2800000, guid: d5556c11af13fe2499d88cd6a07add70, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GrabTexture:
+        m_Texture: {fileID: 2800000, guid: 6d46ff91c0ff66149a5734e563ff548a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Floats: []
-    m_Colors: []
+    m_Floats:
+    - _DisplacementPower: 0.82
+    - _ShakePower: 0.00227
+    - _ShakeSpeed: 13.1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

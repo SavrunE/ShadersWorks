@@ -5,6 +5,7 @@ Shader "Unlit/AsphaltUnlitShaderBreath"
 		_MainTex("Texture", 2D) = "white" {}
 		_ColorMultipler("ColorMultipler", Color) = (1,1,1,1)
 		_Saturation("Saturation", Range(0,3)) = 0.71
+		_Power("Power", Range(0,1)) = 0.1
 	}
 		SubShader
 		{
@@ -37,6 +38,7 @@ Shader "Unlit/AsphaltUnlitShaderBreath"
 				float4 _MainTex_ST;
 				float4 _ColorMultipler;
 				half _Saturation;
+				half _Power;
 
 				#define TWO_PI 6.28f
 
@@ -52,7 +54,7 @@ Shader "Unlit/AsphaltUnlitShaderBreath"
 				 fixed4 frag(v2f i) : SV_Target
 				 {
 					 // sample the texture
-					  i.uv.y += sin(i.uv.x * TWO_PI/2 + _Time.y) / 5 * i.uv.y;
+					  i.uv.y += sin(i.uv.x * TWO_PI/2 + _Time.y) / 5 * i.uv.y * _Power ;
 					 fixed4 col = tex2D(_MainTex, i.uv);
 					 col = col * _Saturation * _ColorMultipler;
 					 return col;

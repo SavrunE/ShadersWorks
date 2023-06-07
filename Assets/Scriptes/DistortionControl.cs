@@ -6,10 +6,27 @@ public class DistortionControl : MonoBehaviour
 {
 	[SerializeField] private Material _material;
 	[SerializeField, Range(0.01f, 2f)] private float _speed;
+	[SerializeField, Range(1f, 20f)] private float _timeToChangeColor = 10f;
+
+
+	private Color _colorStart = Color.white;
+	private Color _colorEnd = Color.red;
 
 	private const string _propertyKey = "_PointOffset";
+	private const string _colorKey = "_DistortColor";
 
 	private Vector2 _offset;
+
+	private void OnEnable()
+	{
+		StartCoroutine(SmoothEnableIllumination());
+	}
+
+	private void OnDisable()
+	{
+		StopAllCoroutines();
+		_material.SetColor(_colorKey, _colorStart);
+	}
 
 	private void Update()
 	{
@@ -36,5 +53,18 @@ public class DistortionControl : MonoBehaviour
 		}
 
 		_material.SetVector(_propertyKey, _offset);
+	}
+
+	private IEnumerator SmoothEnableIllumination()
+	{
+		var time = 0f;
+		var deltaTime = 0f;
+		while (time < _timeToChangeColor)
+		{
+			deltaTime = Time.deltaTime;
+			_material.SetColor(_colorKey, Color.Lerp(_colorStart, _colorEnd, deltaTime / _timeToChangeColor));
+			time += deltaTime;
+			yield return null;
+		}
 	}
 }

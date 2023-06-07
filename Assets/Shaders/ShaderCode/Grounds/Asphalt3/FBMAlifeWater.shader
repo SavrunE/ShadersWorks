@@ -86,6 +86,19 @@ Shader "Unlit/FBMAlifeWater"
 					return result;
 				}
 
+				float2 rotateUV(float2 uv, float2 pivot, float rotation) 
+				{
+					float sine = sin(rotation);
+					float cosine = cos(rotation);
+
+					uv -= pivot;
+					uv.x = uv.x * cosine - uv.y * sine;
+					uv.y = uv.x * sine + uv.y * cosine;
+					uv += pivot;
+
+					return uv;
+				}
+
 				v2f vert(appdata v)
 				{
 					v2f o;
