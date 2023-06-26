@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: IgorCustom_ChromoKey1.11
-  m_Shader: {fileID: 4800000, guid: 8eb686df41f1c9241820dab5c941dfe7, type: 3}
+  m_Name: Unlit_igChromoKey
+  m_Shader: {fileID: 4800000, guid: e47ba6dbd08f34448bbcfa1a3a72b71b, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -20,28 +20,34 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
+        m_Texture: {fileID: 8400000, guid: aac8845a2bb35a747ac45039cee0f9d0, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
         m_Texture: {fileID: 2800000, guid: 5170d9a6e09f7c94f9165d92b11c6677, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Alpha: 0.9
+    - AlphaChangePower: 0.15
+    - AlphaChangeSpeed: 4.02
+    - Fuzziness: 0.1
+    - Threshold: 0.4
     - Vector1_11E1B4BD: 0.1
     - Vector1_49e144ba94ff45d69d9e2f857e8792d3: 0.15
     - Vector1_84B7BD56: 0.4
-    - Vector1_a188cb0e3ebc430892b6caa9749ab8fe: 0.95
+    - Vector1_a188cb0e3ebc430892b6caa9749ab8fe: 0.9
     - Vector1_c109ebef38e94e83833c672705e0b813: 4.02
+    - _Alpha: 0.95
+    - _AlphaChangePower: 0.15
+    - _AlphaChangeSpeed: 4.02
+    - _AlphaThreshold: 0.25
+    - _Fuzziness: 0.1
+    - _Threshold: 0.4
     m_Colors:
     - Color_4191095A: {r: 0.07843138, g: 0.6039216, b: 0.04313726, a: 1}
-    - Color_97b43704a5214c648f22520c94a0138c: {r: 1, g: 1, b: 1, a: 1}
+    - Color_97b43704a5214c648f22520c94a0138c: {r: 1, g: 1, b: 1, a: 0}
+    - KeyColor: {r: 0.07843138, g: 0.6039216, b: 0.04313726, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _KeyColor: {r: 0.07843138, g: 0.6039216, b: 0.04313726, a: 1}
   m_BuildTextureStacks: []

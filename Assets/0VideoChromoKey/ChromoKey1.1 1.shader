@@ -2499,8 +2499,8 @@ Shader "IgorCustom/ChromoKey1.11"
             float _ColorMask_b782c178915803859dc56cc2f5633b08_Out_3;
             Unity_ColorMask_float(_Vector3_a25f3b8a91534787a1ecd5232714899f_Out_0, (_Property_89fd222daa213282a55e67b2ebe7e3d5_Out_0.xyz), _Property_d384d8f98b89a989a82fb2a7736b0112_Out_0, _ColorMask_b782c178915803859dc56cc2f5633b08_Out_3, _Property_39fcd11c278ac58595a8399c79d31da4_Out_0);
             float _InvertColors_76911ff5d91e0b878daef6f1a7ca5089_Out_1;
-            float _InvertColors_76911ff5d91e0b878daef6f1a7ca5089_InvertColors = float (1
-        );    Unity_InvertColors_float(_ColorMask_b782c178915803859dc56cc2f5633b08_Out_3, _InvertColors_76911ff5d91e0b878daef6f1a7ca5089_InvertColors, _InvertColors_76911ff5d91e0b878daef6f1a7ca5089_Out_1);
+            float _InvertColors_76911ff5d91e0b878daef6f1a7ca5089_InvertColors = float (1);    
+            Unity_InvertColors_float(_ColorMask_b782c178915803859dc56cc2f5633b08_Out_3, _InvertColors_76911ff5d91e0b878daef6f1a7ca5089_InvertColors, _InvertColors_76911ff5d91e0b878daef6f1a7ca5089_Out_1);
             float _Property_4a31eef0e3bf4d789fceb491f78ee5ad_Out_0 = Vector1_a188cb0e3ebc430892b6caa9749ab8fe;
             float _Property_641f267e8c914610b2c41b25d7e5dc80_Out_0 = Vector1_c109ebef38e94e83833c672705e0b813;
             float _Multiply_c8c540a456cb4426b0f4d4f6c15c79bb_Out_2;
