@@ -8,7 +8,6 @@ Shader "Unlit/igChromoKey"
         _Fuzziness("Fuzziness", Float) = 0.1
         _AlphaChangePower("AlphaChangePower", Float) = 0.15
         _AlphaChangeSpeed("AlphaChangeSpeed", Float) = 4.02
-        _AlphaThreshold("_AlphaThreshold", Float) = 0.25
         _Color("Color", Color) = (1, 1, 1, 1)
     }
     SubShader
@@ -48,7 +47,6 @@ Shader "Unlit/igChromoKey"
             float _Fuzziness;
             float _AlphaChangeSpeed;
             float _AlphaChangePower;
-            float _AlphaThreshold;
             float4 _Color;
 
 
@@ -83,7 +81,7 @@ Shader "Unlit/igChromoKey"
                 
                 float alpha = _Color.a;
                 alpha = alpha * invertColors + alphaPower;
-                clip(alpha - _AlphaThreshold);
+                clip(alpha - 0.25);
 
                 return float4(mainColor, alpha);
             }
